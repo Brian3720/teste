@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps API Exemplo</title>
+    <!-- Inclui a biblioteca da API do Google Maps com a chave de API e configurações adicionais -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoCoTo3ZWQ5NGnoq5X7ZZ46m0mtMKLhdI&libraries=places&callback=initMap"
+      async
+      defer
+    ></script>
+
+    <script>
+      // Estilos personalizados para o mapa
+      var styles = {
+        default: null,
+        hide: [
+          {
+            featureType: 'poi',
+            stylers: [{ visibility: 'off' }]
+          },
+          {
+            featureType: 'transit',
+            elementType: 'labels.icon',
+            stylers: [{ visibility: 'off' }]
+          },
+          {
+            featureType: 'road',
+            elementType: 'labels.icon',
+            stylers: [{ visibility: 'off' }]
+          }
+        ]
+      };
+
+      // Função chamada quando a API do Google Maps é carregada
+      function initMap() {
+        // Coordenadas padrão para o centro do mapa
+        var myLatLng = { lat: -23.4869, lng: -46.3483 };
+
+        // Cria um novo mapa e o associa ao elemento HTML com o ID 'map'
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,
+          center: myLatLng,
+          disableDefaultUI: true, // Desativa todos os controles padrão
+        });
+
+        // Aplica estilos personalizados ao mapa
+        map.setOptions({ styles: styles['hide'] });
+
+        // Adiciona um marcador ao mapa nas coordenadas especificadas
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Nome do Local'
+        });
+      }
+    </script>
+    
+  </head>
+  <body>
+    <!-- Elemento HTML que servirá como contêiner para o mapa -->
+    <div id="map" style="height: 500px; width: 100%"></div>
+
+    <script>
+      // Chama a função initMap após o carregamento da página
+      initMap();
+    </script>
+  </body>
+</html>
